@@ -60,12 +60,19 @@ function getWeather(){
     })
 }
 
-function getNews(){
+function formatDateString(){
+    // we are requesting the NewsAPI fetch data with the 'from' parameter of three days ago, this function formats the date string for that request
+    const date = new Date();
+    const date1 = new Date(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`);
+    const threeDaysAgo = new Date(date1.setDate(date1.getDate()-3));
+    return `${threeDaysAgo.getFullYear()}-${threeDaysAgo.getMonth() + 1}-${threeDaysAgo.getDate()}`;
+}
 
+function getNews(){
     const baseURL = 'https://newsapi.org/v2/everything?';
     const params = {
         q: 'portland%oregon',
-        from: '2019-05-03',
+        from: formatDateString(),
         sortby: 'relevance',
         language: 'en',
         apiKey: 'ad83316ad56944b7985882d4fc4b13db'
@@ -87,6 +94,7 @@ function getNews(){
           handleError(error);
     })
 }
+
 
 getWeather();
 getNews();
