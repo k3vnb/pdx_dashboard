@@ -19,7 +19,16 @@ function formatQueryParams(params) {
   }
 
 function renderResults(json){
-    console.log(json);
+    const el = document.getElementById('weather');
+    const {temp, temp_min, temp_max} = json.main;
+    el.innerHTML = `
+        <ul>
+            <li>Current Temp: ${temp}&#176 F</li>
+            <li>Today's High: ${temp_min}&#176 F</li>
+            <li>Today's Low: ${temp_max}&#176 F</li>
+            <li>${json.weather[0].description}</li>
+        </ul>
+    `
 }
 
 function getWeather(){
@@ -30,6 +39,7 @@ function getWeather(){
     const params = {
         lat: 45.5202,
         lon: -122.6742,
+        units: 'imperial',
         appid: '653c86db32d0605a0469a4863b99f2af'
     }
     const queryString = formatQueryParams(params);
