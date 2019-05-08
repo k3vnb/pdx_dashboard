@@ -7,7 +7,21 @@ html {
     box-sizing: inherit;
   }
 
+section {
+  border-bottom: 1px solid black;
+}
 
+ul.news-articles-container {
+  padding: 0;
+  margin: 0% 5%;
+}
+
+.news-articles-container > li {
+  list-style: none;
+  padding: 3%;
+  border: .5px solid grey;
+  margin-bottom: 3%;
+}
 
   /* loading spinner */
 

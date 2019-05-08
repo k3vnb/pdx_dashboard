@@ -1,9 +1,5 @@
 'use strict'
 
-
-const igKey = '73974086bd0f4c9f809a956debb7c0a2';
-const meetUpKey = '';
-
 function loadingSpinner(){
     const overlay = document.getElementById("loading-spinner-overlay");
 
@@ -31,6 +27,24 @@ function renderWeatherResults(json){
     `
 }
 function renderNewsResults(json){
+    const {articles} = json;
+    const el = document.getElementById('news-articles');
+    for (let i=0; i<articles.length - 1; i++){
+        //check titles to avoid rendering duplicate news articles
+        if (articles[i].title !== articles[i+1].title){
+            const node = document.createElement("LI");
+            node.innerHTML = `
+            <h4>${articles[i].title}</h4>
+            ${articles[i].urlToImage ? `<img height=140 src=${articles[i].urlToImage} alt="article image" />` : `<h6>No Image</h6>`}
+            <p>${json.articles[i].description}</p>
+            <h5><a href="${json.articles[i].url}">Go to article</a></h5>
+            `;
+            el.appendChild(node);
+        }
+    }
+}
+
+function renderMeetUpResults(json){
     console.log(json);
 }
 
@@ -53,7 +67,7 @@ function getWeather(){
         }
       })
       .then(responseJson => {
-          renderNewsResults(responseJson)
+          renderWeatherResults(responseJson)
         })
       .catch(error => {
           handleError(error);
@@ -71,7 +85,7 @@ function formatDateString(){
 function getNews(){
     const baseURL = 'https://newsapi.org/v2/everything?';
     const params = {
-        q: 'portland%oregon',
+        q: 'portland%20oregon%20OR%20(pdx)%20OR%20(97214)',
         from: formatDateString(),
         sortby: 'relevance',
         language: 'en',
@@ -88,13 +102,12 @@ function getNews(){
         }
       })
       .then(responseJson => {
-          renderWeatherResults(responseJson)
+          renderNewsResults(responseJson)
         })
       .catch(error => {
           handleError(error);
     })
 }
-
 
 getWeather();
 getNews();
