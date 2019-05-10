@@ -1,8 +1,12 @@
 'use strict'
 
+const STORE = {
+    newsFeedPage: 1,
+    picsFeedPage: 1
+}
+
 function loadingSpinner(){
     const overlay = document.getElementById("loading-spinner-overlay");
-
     window.addEventListener('load', function(){
         overlay.style.display = 'none';
     });
@@ -15,44 +19,44 @@ function formatQueryParams(params) {
   }
 
 function renderWeatherResults(json){
-    const el = document.getElementById('weather');
     const {temp, temp_min, temp_max} = json.main;
     getBackgroundImage(json.weather[0].main);
-    el.innerHTML = `
-        <ul>
+    $('.weather-list').html( `
             <li>Current Temp: ${temp}&#176 F</li>
             <li>Today's High: ${temp_max}&#176 F</li>
             <li>Today's Low: ${temp_min}&#176 F</li>
             <li>${json.weather[0].description}</li>
-        </ul>
-    `
+    `);
 }
 
 function renderBackground(image){
-
     $('.weather-section').css("backgroundImage", `url(${image})`);
 }
 
 function renderNewsResults(json){
+    $('#news-articles').empty();
     const {articles} = json;
-    const el = document.getElementById('news-articles');
     for (let i=0; i<articles.length - 1; i++){
         //check titles to avoid rendering duplicate news articles
         if (articles[i].title !== articles[i+1].title){
-            const node = document.createElement("LI");
-            node.innerHTML = `
+            const newsNode = document.createElement("LI");
+            newsNode.innerHTML = `
             <h4>${articles[i].title}</h4>
-            ${articles[i].urlToImage ? `<img height=140 src=${articles[i].urlToImage} alt="article image" />` : `<h6>No Image</h6>`}
+            ${articles[i].urlToImage ? `<img class="article-img" src=${articles[i].urlToImage} alt="article image" />` : `<h6>No Image</h6>`}
             <p>${json.articles[i].description}</p>
             <h5><a href="${json.articles[i].url}">Go to article</a></h5>
             `;
-            el.appendChild(node);
+            $('#news-articles').append(newsNode);
         }
     }
 }
 
 function renderPictures(json){
-    console.log(json.hits);
+    $('#pictures-from-pexa').empty();
+    json.hits.forEach(pic => {
+        $('#pictures-from-pexa').append(`<li><img src=${pic.previewURL}></li>`)
+
+    })
 }
 
 function getWeather(){
@@ -95,6 +99,7 @@ function getNews(){
         q: 'portland%20oregon%20OR%20(pdx)%20OR%20(97214)',
         from: formatDateString(),
         sortby: 'relevance',
+        page: STORE.newsFeedPage,
         language: 'en',
         apiKey: 'ad83316ad56944b7985882d4fc4b13db'
     }
@@ -117,8 +122,18 @@ function getNews(){
 }
 
 function refreshNewsFeed(){
-    document.getElementById("news-refresh-btn").addEventListener("click", function(){
-        getNews()
+
+    $("#news-refresh-btn").click(function(){
+        STORE.newsFeedPage++
+        getNews();
+      });
+}
+
+function refreshPicsFeed(){
+
+    $("#pics-refresh-btn").click(function(){
+        STORE.picsFeedPage++
+        getPictures();
       });
 }
 
@@ -128,7 +143,7 @@ function getPictures(){
         q: 'Oregon',
         image_type: 'photo',
         key: '12444469-83bd90a71dc6737ff73a0bfd6',
-        page: 3
+        page: STORE.picsFeedPage
     }
     const queryString = formatQueryParams(params);
     fetch(`${baseURL}${queryString}`)
@@ -172,7 +187,6 @@ function getBackgroundImage(q){
       })
       .then(responseJson => {
           const randomNumber = Math.floor(Math.random() * 10)
-          console.log(randomNumber)
           renderBackground(responseJson.photos[randomNumber].src.landscape)
         })
       .catch(error => {
@@ -187,5 +201,6 @@ $(
     getPictures(),
     getNews(),
     refreshNewsFeed(),
+    refreshPicsFeed(),
     loadingSpinner()
 );

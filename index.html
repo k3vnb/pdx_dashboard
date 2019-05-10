@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Portland Oregon's front page information resource">
     <meta name="keywords" content="Portland, PDX, Oregon, PDX News, Portland News, Portland Events, PDX Events">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans|Questrial" rel="stylesheet">
     <title>PDX Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
@@ -14,26 +15,24 @@
         <div class="spinner"></div>
     </div>
     <header role="banner" class="site-header">
-        <a class="site-logo" href="#" rel="home" title="to homepage">
-            <h1>
-                PDX Dashboard
-            </h1>
-        </a>
-        <nav class="site-header-quick-menu">
-        </nav>
-
-        <div role="search" class="search-menu">
-        </div>
-
+        <h1>
+            PDX Dashboard
+        </h1>
     </header>
 
     <main id="content" role="main">
-        <section id="weather" class="weather-section">         
+        <section id="weather" class="weather-section">   
+            <ul class="weather-list"></ul>      
         </section>
         <section id="news" class="news-section">
-            <button id="news-refresh-btn">Refresh</button>
             <h2>News with keyword "Portland, OR"</h2>
+            <button id="news-refresh-btn">Get More News</button>
             <ul id="news-articles" class="news-articles-container"></ul>
+        </section>
+        <section id="pictures" class="pictures-section">
+            <h2>Pictures with keyword "Portland, OR"</h2>
+            <button id="pics-refresh-btn">Get More Pictures</button>
+            <ul id="pictures-from-pexa" class="api-pictures"></ul>
         </section>
     </main>
 
