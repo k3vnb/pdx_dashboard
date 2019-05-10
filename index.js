@@ -17,7 +17,7 @@ function formatQueryParams(params) {
 function renderWeatherResults(json){
     const el = document.getElementById('weather');
     const {temp, temp_min, temp_max} = json.main;
-    getPictures(json.weather[0].main);
+    getBackgroundImage(json.weather[0].main);
     el.innerHTML = `
         <ul>
             <li>Current Temp: ${temp}&#176 F</li>
@@ -27,6 +27,12 @@ function renderWeatherResults(json){
         </ul>
     `
 }
+
+function renderBackground(image){
+
+    $('.weather-section').css("backgroundImage", `url(${image})`);
+}
+
 function renderNewsResults(json){
     const {articles} = json;
     const el = document.getElementById('news-articles');
@@ -46,7 +52,7 @@ function renderNewsResults(json){
 }
 
 function renderPictures(json){
-    console.table(json.hits);
+    console.log(json.hits);
 }
 
 function getWeather(){
@@ -116,13 +122,14 @@ function refreshNewsFeed(){
       });
 }
 
-function getPictures(query){
+function getPictures(){
     const baseURL = 'https://pixabay.com/api/?';
     const params = {
+        q: 'Oregon',
         image_type: 'photo',
-        key: '12444469-83bd90a71dc6737ff73a0bfd6'
+        key: '12444469-83bd90a71dc6737ff73a0bfd6',
+        page: 3
     }
-    params.q = query;
     const queryString = formatQueryParams(params);
     fetch(`${baseURL}${queryString}`)
     .then(response =>   {
@@ -141,10 +148,44 @@ function getPictures(query){
     })
 }
 
+function getBackgroundImage(q){
+    const baseURL = 'https://api.pexels.com/v1/search?';
+    const params = {
+        per_page: 10,
+        page: 1
+    }
+    params.query = q;
+    console.log(params)
+    const queryString = formatQueryParams(params);
+    return fetch(`${baseURL}${queryString}`, {
+        headers: new Headers({
+            "Authorization": "563492ad6f917000010000016b7a73828a0543f0860f96ea04808de5"
+        })
+    })
+    .then(response =>   {
+        console.log(response)
+        if (response.ok) {
+            return response.json();
+        } else {
+          throw new Error('Oops. Something went wrong!');
+        }
+      })
+      .then(responseJson => {
+          const randomNumber = Math.floor(Math.random() * 10)
+          console.log(randomNumber)
+          renderBackground(responseJson.photos[randomNumber].src.landscape)
+        })
+      .catch(error => {
+          handleError(error);
+    })   
+    
+}
 
 
-getWeather();
-getPictures('Oregon');
-getNews();
-refreshNewsFeed();
-loadingSpinner();
+$(
+    getWeather(),
+    getPictures(),
+    getNews(),
+    refreshNewsFeed(),
+    loadingSpinner()
+);

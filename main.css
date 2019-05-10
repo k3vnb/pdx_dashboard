@@ -23,6 +23,19 @@ ul.news-articles-container {
   margin-bottom: 3%;
 }
 
+/* weather section */
+.weather-section {
+  background-position: bottom;
+  padding: 10%;
+}
+
+.weather-section ul {
+  list-style: none;
+  padding: 5%;
+  background-color: #211a1ac2;
+  color: white;
+}
+
   /* loading spinner */
 
 #loading-spinner-overlay {
