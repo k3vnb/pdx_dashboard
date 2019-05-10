@@ -17,11 +17,12 @@ function formatQueryParams(params) {
 function renderWeatherResults(json){
     const el = document.getElementById('weather');
     const {temp, temp_min, temp_max} = json.main;
+    getPictures(json.weather[0].main);
     el.innerHTML = `
         <ul>
             <li>Current Temp: ${temp}&#176 F</li>
-            <li>Today's High: ${temp_min}&#176 F</li>
-            <li>Today's Low: ${temp_max}&#176 F</li>
+            <li>Today's High: ${temp_max}&#176 F</li>
+            <li>Today's Low: ${temp_min}&#176 F</li>
             <li>${json.weather[0].description}</li>
         </ul>
     `
@@ -44,8 +45,8 @@ function renderNewsResults(json){
     }
 }
 
-function renderMeetUpResults(json){
-    console.log(json);
+function renderPictures(json){
+    console.table(json.hits);
 }
 
 function getWeather(){
@@ -109,6 +110,41 @@ function getNews(){
     })
 }
 
+function refreshNewsFeed(){
+    document.getElementById("news-refresh-btn").addEventListener("click", function(){
+        getNews()
+      });
+}
+
+function getPictures(query){
+    const baseURL = 'https://pixabay.com/api/?';
+    const params = {
+        image_type: 'photo',
+        key: '12444469-83bd90a71dc6737ff73a0bfd6'
+    }
+    params.q = query;
+    const queryString = formatQueryParams(params);
+    fetch(`${baseURL}${queryString}`)
+    .then(response =>   {
+        console.log(response)
+        if (response.ok) {
+            return response.json();
+        } else {
+          throw new Error('Oops. Something went wrong!');
+        }
+      })
+      .then(responseJson => {
+          renderPictures(responseJson)
+        })
+      .catch(error => {
+          handleError(error);
+    })
+}
+
+
+
 getWeather();
+getPictures('Oregon');
 getNews();
+refreshNewsFeed();
 loadingSpinner();
