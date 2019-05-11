@@ -78,15 +78,43 @@ ul.news-articles-container {
 #picture-gallery {
   list-style: none;
   display: flex;
+  justify-content: space-around;
   flex-wrap: wrap;
+  padding: 0;
 }
+
 #picture-gallery li {
   margin: 2%;
+  width: 80%;
+  height: 170px;
+}
+#picture-gallery li img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+@media screen and (min-width: 550px){
+  #picture-gallery {
+    justify-content: flex-start;
+  }
+  #picture-gallery li {
+    width: 40%;
+  }
+}
+@media screen and (min-width: 650px){
+  #picture-gallery li {
+    width: 25%;
+  }
+}
+@media screen and (min-width: 850px){
+  #picture-gallery li {
+    width: 16%;
+  }
 }
 .gallery-img:hover {
   cursor: pointer;
-  box-shadow: -1px -1px 0px blue;
-  border: 1px inset blue;
+  box-shadow: 0px 0px 5px blue;
 }
 
 /* lightbox section */

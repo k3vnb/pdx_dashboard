@@ -1,6 +1,5 @@
 function handleCloseLightbox(){
     $('.lightbox').on("click",() => {
-        console.log('yerp')
         $('.lightbox').css('display', 'none')})
 }
 
@@ -26,5 +25,3 @@ function handleGalleryImageClick(){
 $(
     handleGalleryImageClick()
 );
-
-// const heroImg = $(event.currentTarget).find("img").attr("src");
