@@ -71,12 +71,12 @@ ul.news-articles-container {
 }
 
 /* pictures section */
-#pictures-from-pexa {
+#picture-gallery {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
 }
-#pictures-from-pexa li {
+#picture-gallery li {
   margin: 2%;
 }
 

@@ -2,7 +2,8 @@
 
 const STORE = {
     newsFeedPage: 1,
-    picsFeedPage: 1
+    picsFeedPage: 1,
+    imageGallery: []
 }
 
 function loadingSpinner(){
@@ -57,10 +58,10 @@ function renderNewsResults(json){
 }
 
 function renderPictures(json){
-    $('#pictures-from-pexa').empty();
+    $('#picture-gallery').empty();
     json.hits.forEach(pic => {
-        $('#pictures-from-pexa').append(`<li><img src=${pic.previewURL}></li>`)
-
+        STORE.imageGallery.push({url: pic.largeImageURL, id: pic.id})
+        $('#picture-gallery').append(`<li><img class="gallery-img" id=${pic.id} src=${pic.previewURL} alt="${pic.tags} photo"></li>`)
     })
 }
 
@@ -129,7 +130,7 @@ function getPictures(){
         page: STORE.picsFeedPage
     }
     const queryString = formatQueryParams(params);
-    formatFetchAPIData(baseURL, queryString, renderPictures, '#pictures-from-pexa')
+    formatFetchAPIData(baseURL, queryString, renderPictures, '#picture-gallery')
 }
 
 function getWeather(){
@@ -171,7 +172,7 @@ function getBackgroundImage(q){
           renderBackground(responseJson.photos[randomNumber].src.landscape)
         })
       .catch(error => {
-          handleError('#pictures-from-pexa', error);
+          handleError('#picture-gallery', error);
     })   
     
 }
