@@ -12,6 +12,11 @@ function loadingSpinner(){
     });
 }
 
+function handleError(section, err){
+    $(section).empty();
+    $(section).html(`<h3>${err}</h3>`);
+}
+
 function formatQueryParams(params) {
     const queryItems = Object.keys(params)
       .map(key => `${key}=${params[key]}`)
@@ -59,15 +64,9 @@ function renderPictures(json){
     })
 }
 
-function getWeather(){
-    const baseURL = 'https://api.openweathermap.org/data/2.5/weather?';
-    const params = {
-        lat: 45.5202,
-        lon: -122.6742,
-        units: 'imperial',
-        appid: '653c86db32d0605a0469a4863b99f2af'
-    }
-    const queryString = formatQueryParams(params);
+
+
+function formatFetchAPIData(baseURL, queryString, renderFunction, renderSection){
     fetch(`${baseURL}${queryString}`)
     .then(response =>   {
         console.log(response)
@@ -78,15 +77,15 @@ function getWeather(){
         }
       })
       .then(responseJson => {
-          renderWeatherResults(responseJson)
+          renderFunction(responseJson)
         })
       .catch(error => {
-          handleError(error);
+          handleError(renderSection, error);
     })
 }
 
 function formatDateString(){
-    // we are requesting the NewsAPI fetch data with the 'from' parameter of three days ago, this function formats the date string for that request
+    // creates date string for 3 days ago, to be supplied as a 'From' param to news api 
     const date = new Date();
     const date1 = new Date(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`);
     const threeDaysAgo = new Date(date1.setDate(date1.getDate()-3));
@@ -104,25 +103,10 @@ function getNews(){
         apiKey: 'ad83316ad56944b7985882d4fc4b13db'
     }
     const queryString = formatQueryParams(params);
-    fetch(`${baseURL}${queryString}`)
-    .then(response =>   {
-        console.log(response)
-        if (response.ok) {
-            return response.json();
-        } else {
-          throw new Error('Oops. Something went wrong!');
-        }
-      })
-      .then(responseJson => {
-          renderNewsResults(responseJson)
-        })
-      .catch(error => {
-          handleError(error);
-    })
+    formatFetchAPIData(baseURL, queryString, renderNewsResults, '#news-articles')
 }
 
 function refreshNewsFeed(){
-
     $("#news-refresh-btn").click(function(){
         STORE.newsFeedPage++
         getNews();
@@ -130,7 +114,6 @@ function refreshNewsFeed(){
 }
 
 function refreshPicsFeed(){
-
     $("#pics-refresh-btn").click(function(){
         STORE.picsFeedPage++
         getPictures();
@@ -146,21 +129,19 @@ function getPictures(){
         page: STORE.picsFeedPage
     }
     const queryString = formatQueryParams(params);
-    fetch(`${baseURL}${queryString}`)
-    .then(response =>   {
-        console.log(response)
-        if (response.ok) {
-            return response.json();
-        } else {
-          throw new Error('Oops. Something went wrong!');
-        }
-      })
-      .then(responseJson => {
-          renderPictures(responseJson)
-        })
-      .catch(error => {
-          handleError(error);
-    })
+    formatFetchAPIData(baseURL, queryString, renderPictures, '#pictures-from-pexa')
+}
+
+function getWeather(){
+    const baseURL = 'https://api.openweathermap.org/data/2.5/weather?';
+    const params = {
+        lat: 45.5202,
+        lon: -122.6742,
+        units: 'imperial',
+        appid: '653c86db32d0605a0469a4863b99f2af'
+    }
+    const queryString = formatQueryParams(params);
+    formatFetchAPIData(baseURL, queryString, renderWeatherResults, '.weather-list');
 }
 
 function getBackgroundImage(q){
@@ -190,7 +171,7 @@ function getBackgroundImage(q){
           renderBackground(responseJson.photos[randomNumber].src.landscape)
         })
       .catch(error => {
-          handleError(error);
+          handleError('#pictures-from-pexa', error);
     })   
     
 }
