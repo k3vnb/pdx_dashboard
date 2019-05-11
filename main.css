@@ -13,6 +13,10 @@ h1 {
   text-decoration: none;
 }
 
+main {
+  position: relative;
+}
+
 section {
   border-bottom: 1px solid black;
 }
@@ -79,6 +83,33 @@ ul.news-articles-container {
 #picture-gallery li {
   margin: 2%;
 }
+.gallery-img:hover {
+  cursor: pointer;
+  box-shadow: -1px -1px 0px blue;
+  border: 1px inset blue;
+}
+
+/* lightbox section */
+
+.lightbox {
+  top: 0;
+  left: 0;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: #000000c7;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-photo {
+  width: 80%;
+  height: auto;
+  object-fit: contain;
+}
+
+
 
   /* loading spinner */
 
