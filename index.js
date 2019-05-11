@@ -55,6 +55,8 @@ function renderNewsResults(json){
             $('#news-articles').append(newsNode);
         }
     }
+    $('#news-articles').append(`<li><button id="news-refresh-btn">Get More News</button></li>`)
+    refreshNewsFeed();
 }
 
 function renderPictures(json){
@@ -109,6 +111,7 @@ function getNews(){
 
 function refreshNewsFeed(){
     $("#news-refresh-btn").click(function(){
+        $('#news-articles').animate({scrollLeft: 0});
         STORE.newsFeedPage++
         getNews();
       });
@@ -182,7 +185,7 @@ $(
     getWeather(),
     getPictures(),
     getNews(),
-    refreshNewsFeed(),
+    // refreshNewsFeed(),
     refreshPicsFeed(),
     loadingSpinner()
 );
