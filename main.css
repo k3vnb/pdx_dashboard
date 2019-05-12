@@ -10,21 +10,57 @@ body {
   background-size:  cover;
   background-repeat: no-repeat;
   background-position: center;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  background-color: #7a00ff94;
+  padding: 3%;
 }
 
 h1 {
-  font-family: 'Merriweather Sans', sans-serif;
-  text-align: center;
-  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
 }
+.h1-topline {
+  font-size: 2.4em;
+  letter-spacing: 7px;
+}
+h1, .weather-list {
+  color: #ffffff;
+  text-shadow: 0.5px 0.5px 1.5px #b57070;
+}
+h1, h2, .weather-list {
+  font-family: 'Questrial', sans-serif;
+}
+.weather-list {
+  min-width: 150px;
+  text-align: right;
+  padding: 5%;
+}
+h2 {
+  background-color: #211a1ac2;
+  color: white;
+  padding: 5% 0 5% 7%;
+  margin: 0;
+  width: 110%;
+  margin-left: -5%;
+}
+
+.current-temp {
+  font-size: 2.5em;
+}
+
 
 main {
   position: relative;
 }
 
-section {
-  border-bottom: 1px solid black;
-}
 
 
 .news-articles-container > li {
@@ -107,10 +143,7 @@ section {
 } */
 
 /* weather section */
-.weather-section {
-  background-position: bottom;
-  padding: 10%;
-}
+
 
 .weather-section ul {
   list-style: none;
@@ -175,6 +208,13 @@ section {
   box-shadow: 0px 0px 5px blue;
 }
 
+/* footer section */
+.site-footer {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  padding: 5% 5% 1%;
+}
 /* lightbox section */
 
 .lightbox {

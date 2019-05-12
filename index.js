@@ -24,21 +24,21 @@ function formatQueryParams(params) {
     return queryItems.join('&');
   }
 
+  
+function renderBackground(image){
+    $('body').css("backgroundImage", `url(${image})`);
+}
+    
 function renderWeatherResults(json){
     const {temp, temp_min, temp_max} = json.main;
     getBackgroundImage(json.weather[0].main);
     $('.weather-list').html( `
-            <li>Current Temp: ${temp}&#176 F</li>
-            <li>Today's High: ${temp_max}&#176 F</li>
-            <li>Today's Low: ${temp_min}&#176 F</li>
-            <li>${json.weather[0].description}</li>
+            <div class="current-weather">
+                <div class="current-temp">${temp}&#176 F</div>
+                <div class="current-weather-description">${json.weather[0].description}</div>
+            </div>
     `);
 }
-
-function renderBackground(image){
-    $('body').css("backgroundImage", `url(${image})`);
-}
-
 function renderNewsResults(json){
     $('#news-articles').empty();
     const {articles} = json;
@@ -50,7 +50,7 @@ function renderNewsResults(json){
             <h4>${articles[i].title}</h4>
             ${articles[i].urlToImage ? `<img class="article-img" src=${articles[i].urlToImage} alt="article image" />` : `<h6>No Image</h6>`}
             <p>${json.articles[i].description}</p>
-            <h5><a href="${json.articles[i].url}">Go to article</a></h5>
+            <h5><a href="${json.articles[i].url}" target="_blank">Go to article</a></h5>
             `;
             $('#news-articles').append(newsNode);
         }
