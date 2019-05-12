@@ -6,6 +6,11 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+body {
+  background-size:  cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 
 h1 {
   font-family: 'Merriweather Sans', sans-serif;
@@ -26,6 +31,7 @@ section {
   list-style: none;
   padding: 3%;
   border: .5px solid grey;
+  background-color:white;
   margin: 3%;
   height: 450px;
   min-width: 400px;
@@ -37,6 +43,7 @@ section {
 }
 .news-articles-container > li:last-child {
   border: none;
+  background-color: transparent;
   align-items: center;
   justify-content: center;
   box-shadow: none;
@@ -72,13 +79,17 @@ section {
   overflow: hidden;
 }
 
-#news-articles::-webkit-scrollbar {
+#news-articles::-webkit-scrollbar, .api-pictures::-webkit-scrollbar {
   height: 20px;
   background-color: #efb1b1;
 }
-#news-articles::-webkit-scrollbar-thumb {
+#news-articles::-webkit-scrollbar-thumb{
   background-color:#e05f5f;
-  border-radius: 16px;
+  border-radius: 50%;
+}
+.api-pictures::-webkit-scrollbar-thumb{
+  background-color:#e05f5f;
+  border-radius: 20px;
 }
 
 
@@ -109,43 +120,56 @@ section {
 }
 
 /* pictures section */
-#picture-gallery {
+.btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+#pics-refresh-btn {
+  height: 30px;
+  border-radius: 16px;
+  background-color: green;
+  color: white;
+}
+.api-pictures {
+  overflow-x: scroll;
+  overfloy-y: hidden;
+}
+.row {
   list-style: none;
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
   padding: 0;
 }
 
-#picture-gallery li {
-  margin: 2%;
-  width: 80%;
-  height: 170px;
+.row li {
+  margin-right: 2%;
+  min-width: 30vw;
+  height: 145px;
 }
-#picture-gallery li img {
+.row li img {
   height: 100%;
   width: 100%;
   object-fit: cover;
 }
 
-@media screen and (min-width: 450px){
-  #picture-gallery {
+/* @media screen and (min-width: 450px){
+  .row {
     justify-content: flex-start;
   }
-  #picture-gallery li {
+  .row li {
     width: 40%;
   }
 }
 @media screen and (min-width: 650px){
-  #picture-gallery li {
+  .row li {
     width: 25%;
   }
 }
 @media screen and (min-width: 850px){
-  #picture-gallery li {
+  .row li {
     width: 16%;
   }
-}
+} */
 .gallery-img:hover {
   cursor: pointer;
   box-shadow: 0px 0px 5px blue;

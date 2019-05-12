@@ -36,7 +36,7 @@ function renderWeatherResults(json){
 }
 
 function renderBackground(image){
-    $('.weather-section').css("backgroundImage", `url(${image})`);
+    $('body').css("backgroundImage", `url(${image})`);
 }
 
 function renderNewsResults(json){
@@ -60,10 +60,23 @@ function renderNewsResults(json){
 }
 
 function renderPictures(json){
-    $('#picture-gallery').empty();
+    $('.row').empty();
+
+    let counter = 0;
+ 
     json.hits.forEach(pic => {
         STORE.imageGallery.push({url: pic.largeImageURL, id: pic.id})
-        $('#picture-gallery').append(`<li><img class="gallery-img" id=${pic.id} src=${pic.previewURL} alt="${pic.tags} photo"></li>`)
+        if (counter < json.hits.length/3){
+            $('.row-one').append(`<li><img class="gallery-img" id=${pic.id} src=${pic.previewURL} alt="${pic.tags} photo"></li>`)
+            
+        } else if (counter < json.hits.length/1.5){
+            $('.row-two').append(`<li><img class="gallery-img" id=${pic.id} src=${pic.previewURL} alt="${pic.tags} photo"></li>`)
+            
+        } else {
+            $('.row-three').append(`<li><img class="gallery-img" id=${pic.id} src=${pic.previewURL} alt="${pic.tags} photo"></li>`)
+            
+        }
+        counter++
     })
 }
 
@@ -130,6 +143,7 @@ function getPictures(){
         q: 'Oregon',
         image_type: 'photo',
         key: '12444469-83bd90a71dc6737ff73a0bfd6',
+        per_page: 21,
         page: STORE.picsFeedPage
     }
     const queryString = formatQueryParams(params);
