@@ -100,7 +100,7 @@ function formatFetchAPIData(baseURL, queryString, renderFunction, renderSection)
     })
 }
 
-function formatDateString(){
+function formatDateStringForNewsAPI(){
     // creates date string for 3 days ago, to be supplied as a 'From' param to news api 
     const date = new Date();
     const date1 = new Date(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`);
@@ -108,11 +108,32 @@ function formatDateString(){
     return `${threeDaysAgo.getFullYear()}-${threeDaysAgo.getMonth() + 1}-${threeDaysAgo.getDate()}`;
 }
 
+function formatDateStringForMercuryLink(){
+    // creates a date string compatible with PDX Mercury events link
+    const d = new Date();
+    const year = d.getFullYear();
+    const day = d.getDate();
+    const month = d.getMonth() + 1;
+
+    function doubleDigitCheck(n){
+        if (n < 10) {
+            return `0${n}`
+        } else {
+            return n
+        }
+    }
+
+    const formattedMonth = doubleDigitCheck(month);
+    const formattedDay = doubleDigitCheck(day);
+
+    return `${year}-${formattedMonth}-${formattedDay}`
+}
+
 function getNews(){
     const baseURL = 'https://newsapi.org/v2/everything?';
     const params = {
         q: 'portland%20oregon%20OR%20(pdx)%20OR%20(97214)',
-        from: formatDateString(),
+        from: formatDateStringForNewsAPI(),
         sortby: 'relevance',
         page: STORE.newsFeedPage,
         language: 'en',
