@@ -12,6 +12,7 @@ body {
   background-position: center;
   margin: 0;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 header {
@@ -38,18 +39,39 @@ h1, .weather-list {
 h1, h2, .weather-list {
   font-family: 'Questrial', sans-serif;
 }
+section {
+  margin: 5% 0;
+}
+section:first-child {
+  margin-top: 0;
+}
+.section-banner {
+  background-color: #211a1ac2;
+  color: white;
+  width: 110%;
+  margin-left: -5%;
+  padding-right: 10%;
+  display: flex;
+  justify-content: space-between;
+}
+.section-content{
+  display: none;
+}
+.hamburger {
+  background-color: transparent;
+  color: white;
+  outline: none;
+  font-size: 2em;
+  border: none;
+}
+h2 {
+  padding: 5% 0 5% 7%;
+  margin: 0;
+}
 .weather-list {
   min-width: 160px;
   text-align: right;
   padding: 5%;
-}
-h2 {
-  background-color: #211a1ac2;
-  color: white;
-  padding: 5% 0 5% 7%;
-  margin: 0;
-  width: 110%;
-  margin-left: -5%;
 }
 
 .current-temp {

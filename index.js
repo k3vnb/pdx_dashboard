@@ -34,7 +34,7 @@ function renderWeatherResults(json){
     getBackgroundImage(json.weather[0].main);
     $('.weather-list').html( `
             <div class="current-weather">
-                <div class="current-temp">${temp}&#176 F</div>
+                <div class="current-temp">${temp.toFixed(1)}&#176 F</div>
                 <div class="current-weather-description">${json.weather[0].description}</div>
             </div>
     `);
@@ -106,27 +106,6 @@ function formatDateStringForNewsAPI(){
     const date1 = new Date(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`);
     const threeDaysAgo = new Date(date1.setDate(date1.getDate()-3));
     return `${threeDaysAgo.getFullYear()}-${threeDaysAgo.getMonth() + 1}-${threeDaysAgo.getDate()}`;
-}
-
-function formatDateStringForMercuryLink(){
-    // creates a date string compatible with PDX Mercury events link
-    const d = new Date();
-    const year = d.getFullYear();
-    const day = d.getDate();
-    const month = d.getMonth() + 1;
-
-    function doubleDigitCheck(n){
-        if (n < 10) {
-            return `0${n}`
-        } else {
-            return n
-        }
-    }
-
-    const formattedMonth = doubleDigitCheck(month);
-    const formattedDay = doubleDigitCheck(day);
-
-    return `${year}-${formattedMonth}-${formattedDay}`
 }
 
 function getNews(){
@@ -220,7 +199,6 @@ $(
     getWeather(),
     getPictures(),
     getNews(),
-    // refreshNewsFeed(),
     refreshPicsFeed(),
     loadingSpinner()
 );
