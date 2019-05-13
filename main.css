@@ -90,7 +90,8 @@ main {
 }
 .event-link {
   text-decoration: none;
-  background-color: white;
+  background-color: #f1f2f7;
+  border: 1px solid #c721d2;
   width: 45%;
   min-height: 50px;
   margin: 2%;
@@ -172,14 +173,17 @@ main {
 
 #news-articles::-webkit-scrollbar, .api-pictures::-webkit-scrollbar {
   height: 20px;
-  background-color: #efb1b1;
+  background-color: #828282;
+  background-color: #828282ab;
 }
 #news-articles::-webkit-scrollbar-thumb{
-  background-color:#e05f5f;
+  background-color:#26212d;
+  background-color:#26212db3;
   border-radius: 50%;
 }
 .api-pictures::-webkit-scrollbar-thumb{
-  background-color:#e05f5f;
+  background-color:#26212d;
+  background-color:#26212db3;
   border-radius: 20px;
 }
 
@@ -214,10 +218,20 @@ main {
   justify-content: flex-end;
 }
 #pics-refresh-btn {
-  height: 30px;
-  border-radius: 16px;
-  background-color: green;
+  height: 48px;
+  font-size: 1.2em;
+  border-radius: 9px;
+  background-color: #049209;
   color: white;
+  margin: 5%;
+  transition: .1s all;
+}
+#pics-refresh-btn:hover {
+  background-color: #03e003;
+  color: black;
+  border: 1px solid black;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.475);
 }
 .api-pictures {
   overflow-x: scroll;
@@ -269,6 +283,8 @@ main {
   width: 100%;
   justify-content: flex-end;
   padding: 5% 5% 1%;
+  position: fixed;
+  bottom: 1%;
 }
 
 
