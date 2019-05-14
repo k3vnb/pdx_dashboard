@@ -39,6 +39,8 @@ function renderWeatherResults(json){
             </div>
     `);
 }
+
+
 function renderNewsResults(json){
     $('#news-articles').empty();
     const {articles} = json;
@@ -48,7 +50,7 @@ function renderNewsResults(json){
             const newsNode = document.createElement("LI");
             newsNode.innerHTML = `
             <h4>${articles[i].title}</h4>
-            ${articles[i].urlToImage ? `<img class="article-img" src=${articles[i].urlToImage} alt="article image" />` : `<h6>No Image</h6>`}
+            ${articles[i].urlToImage ? `<img class="article-img" src=${articles[i].urlToImage} alt="article image" />` : `<h6 class="article-img">No Image</h6>`}
             <p>${json.articles[i].description}</p>
             <h5><a href="${json.articles[i].url}" target="_blank">Go to article</a></h5>
             `;

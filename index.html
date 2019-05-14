@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,6 +24,9 @@
     </header>
 
     <main id="content" role="main">
+        <section id="site-overview" class="site-overview-section">
+            <h3>News, Events, & Information for Portland, OR</h3>
+        </section>
         <section id="events" class="events-links">
             <div class="events-section-banner section-banner">
                 <h2>Events</h2>
@@ -41,10 +44,10 @@
             </div>
             <div class="news-section-content section-content">
                 <ul id="news-articles" class="news-articles-container">
+                </ul>
             </div>
 
   
-            </ul>
         </section>
         <section id="pictures" class="pictures-section">
             <div class="section-banner pictures-section-banner">
@@ -55,6 +58,7 @@
                 <div class="btn-container">
                     <button id="pics-refresh-btn">Get More Pictures</button>
                 </div>
+                <h4>Click to enlarge</h4>
                 <div id="picture-gallery" class="api-pictures">
                     <ul class="row row-one"></ul>
                     <ul class="row row-two"></ul>
@@ -70,9 +74,9 @@
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="index.js"></script>
-    <script src="lightbox.js"></script>
-    <script src="events.js"></script>
-    <script src="sectionSliders.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/lightbox.js"></script>
+    <script src="js/events.js"></script>
+    <script src="js/sectionSliders.js"></script>
 </body>
 </html>

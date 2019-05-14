@@ -1,43 +1,20 @@
-/* reset */
+/* reset & universal */
 
 html {
     box-sizing: border-box;
+    overflow-x: hidden;
   }
 *, *:before, *:after {
   box-sizing: inherit;
 }
 body {
+  background-color: lavender;
   background-size:  cover;
   background-repeat: no-repeat;
   background-position: center;
   margin: 0;
   overflow-x: hidden;
   min-height: 100vh;
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  background-color: #7a00ff94;
-  padding: 3%;
-}
-
-h1 {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-}
-.h1-topline {
-  font-size: 2.4em;
-  letter-spacing: 7px;
-}
-h1, .weather-list {
-  color: #ffffff;
-  text-shadow: 0.5px 0.5px 1.5px #b57070;
-}
-h1, h2, .weather-list {
-  font-family: 'Questrial', sans-serif;
 }
 section {
   margin: 5% 0;
@@ -68,22 +45,71 @@ h2 {
   padding: 5% 0 5% 7%;
   margin: 0;
 }
+main {
+  position: relative;
+}
+
+/* header */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  background-color: #7a00ff94;
+  padding: 3%;
+}
+h1 {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+.h1-topline {
+  font-size: 2.4em;
+  letter-spacing: 7px;
+}
+h1, .weather-list {
+  color: #ffffff;
+  text-shadow: 0.5px 0.5px 1.5px #b57070;
+}
+h1, h2, .weather-list {
+  font-family: 'Questrial', sans-serif;
+}
 .weather-list {
   min-width: 160px;
   text-align: right;
   padding: 5%;
 }
-
 .current-temp {
   font-size: 2.5em;
 }
+@media screen and (max-width: 340px){
+  .h1-topline {
+    font-size: 1.8em;
+  }
+  .h1-bottomline {
+    font-size: .75em;
+  }
+  .current-temp {
+    font-size: 2em;
+  }
+  .weather-list {
+    min-width: 140px;
+  }
+}
 
-
-main {
-  position: relative;
+.site-overview-section h3 {
+  background-color: #4a004a;
+  background-color: #4a004ac7;
+  font-family: 'Merriweather Sans', sans-serif;;
+  color: white;
+  font-size: .9em;
+  margin: 0;
+  padding: 2%;
+  text-align: right;
 }
 
 /* events section */
+
 .events-links-list {
   display: flex;
   flex-wrap: wrap;
@@ -109,7 +135,6 @@ main {
   background-color: #ff4868;
   color: white;
 }
-
 @media screen and (min-width: 560px){
   .event-link {
     width: 29%;
@@ -150,16 +175,15 @@ main {
   border-radius: 50%;
   transition: background-color .2s;
 }
-
 #news-refresh-btn:hover {
   cursor: pointer;
   background-color: #27ce27;
   text-shadow: .5px .5px 1px black;
 }
-
 #news-articles {
   padding: 0;
   display: flex;
+  width: 95%;
   overflow-y: hidden;
   overflow-x: scroll;
   
@@ -170,6 +194,8 @@ main {
   object-fit: cover;
   overflow: hidden;
 }
+
+/* scrollbars (news & picture gallery) */
 
 #news-articles::-webkit-scrollbar, .api-pictures::-webkit-scrollbar {
   height: 20px;
@@ -187,31 +213,13 @@ main {
   border-radius: 20px;
 }
 
-
-/* @media screen and (min-width: 550px){
-  .news-articles-container > li {
-    width: 45%;
-    margin: 1%;
-  }
-}
-@media screen and (min-width: 750px){
-  .news-articles-container > li {
-    width: 30%;
-    margin: 1%;
-  }
-} */
-
-/* weather section */
-
-
-.weather-section ul {
-  list-style: none;
-  padding: 5%;
-  background-color: #211a1ac2;
-  color: white;
-}
-
 /* pictures section */
+.pictures-section-content h4 {
+  margin: 0;
+  padding: 1% 5% 0%;
+  text-align: right;
+  font-family: 'Merriweather Sans', sans-serif;
+}
 .btn-container {
   width: 100%;
   display: flex;
@@ -236,6 +244,7 @@ main {
 .api-pictures {
   overflow-x: scroll;
   overflow-y: hidden;
+  width: 96%;
   padding: 5%;
 }
 .row {
@@ -254,31 +263,13 @@ main {
   width: 100%;
   object-fit: cover;
 }
-
-/* @media screen and (min-width: 450px){
-  .row {
-    justify-content: flex-start;
-  }
-  .row li {
-    width: 40%;
-  }
-}
-@media screen and (min-width: 650px){
-  .row li {
-    width: 25%;
-  }
-}
-@media screen and (min-width: 850px){
-  .row li {
-    width: 16%;
-  }
-} */
 .gallery-img:hover {
   cursor: pointer;
   box-shadow: 0px 0px 5px blue;
 }
 
 /* footer section */
+
 .site-footer {
   display: flex;
   width: 100%;
@@ -302,7 +293,6 @@ main {
   justify-content: center;
   align-items: center;
 }
-
 .lightbox-photo {
   display: none;
   width: 80%;
@@ -330,6 +320,7 @@ main {
     border-radius: 100%;
     animation: spin 1s infinite;
 }
+
 @keyframes spin {
     from {
         transform: rotate(0deg);

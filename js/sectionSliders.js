@@ -1,3 +1,5 @@
+//sliding animation effect on each section toggle
+
 function slideSection(sectionID) {
     $( `.${sectionID}-section-content` ).slideToggle( "slow");
 };
