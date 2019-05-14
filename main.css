@@ -235,7 +235,8 @@ main {
 }
 .api-pictures {
   overflow-x: scroll;
-  overfloy-y: hidden;
+  overflow-y: hidden;
+  padding: 5%;
 }
 .row {
   list-style: none;
@@ -291,10 +292,10 @@ main {
 /* lightbox section */
 
 .lightbox {
-  top: 0;
+  top: -10vh;
   left: 0;
   position: fixed;
-  height: 100vh;
+  height: 110vh;
   width: 100vw;
   background-color: #000000c7;
   display: none;
@@ -303,6 +304,7 @@ main {
 }
 
 .lightbox-photo {
+  display: none;
   width: 80%;
   height: auto;
   object-fit: contain;

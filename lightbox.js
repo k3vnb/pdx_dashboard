@@ -1,3 +1,10 @@
+function handleSpinner(){
+    $('.lightbox-photo').on('load', ()=> {
+        $('.spinner').css('display', 'none');
+        $('.lightbox-photo').css('display', 'block');
+    })
+}
+
 function handleCloseLightbox(){
     $('.lightbox').on("click",() => {
         $('.lightbox').css('display', 'none')})
@@ -6,9 +13,11 @@ function handleCloseLightbox(){
 function displayLightbox(currentImage){
     $('.lightbox').empty();
     $('.lightbox').append(`
+        <div class="spinner"></div>
         <img class="lightbox-photo" src=${currentImage.url} alt="Selected photo" />
     `)
     $('.lightbox').css('display', 'flex');
+    handleSpinner();
     handleCloseLightbox();
 }
 

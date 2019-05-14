@@ -1,5 +1,4 @@
 function slideSection(sectionID) {
-    console.log(sectionID)
     $( `.${sectionID}-section-content` ).slideToggle( "slow");
 };
     

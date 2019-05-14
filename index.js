@@ -2,7 +2,7 @@
 
 const STORE = {
     newsFeedPage: 1,
-    picsFeedPage: 1,
+    picsFeedPage: 2,
     imageGallery: []
 }
 
@@ -61,9 +61,7 @@ function renderNewsResults(json){
 
 function renderPictures(json){
     $('.row').empty();
-
     let counter = 0;
- 
     json.hits.forEach(pic => {
         STORE.imageGallery.push({url: pic.largeImageURL, id: pic.id})
         if (counter < json.hits.length/3){
@@ -85,7 +83,6 @@ function renderPictures(json){
 function formatFetchAPIData(baseURL, queryString, renderFunction, renderSection){
     fetch(`${baseURL}${queryString}`)
     .then(response =>   {
-        console.log(response)
         if (response.ok) {
             return response.json();
         } else {
@@ -169,7 +166,6 @@ function getBackgroundImage(q){
         page: 1
     }
     params.query = q;
-    console.log(params)
     const queryString = formatQueryParams(params);
     return fetch(`${baseURL}${queryString}`, {
         headers: new Headers({
@@ -177,7 +173,6 @@ function getBackgroundImage(q){
         })
     })
     .then(response =>   {
-        console.log(response)
         if (response.ok) {
             return response.json();
         } else {
