@@ -5,7 +5,7 @@ const eventsList = [
     },
     {
         linkName: `Willamette Week Events`,
-        linkURL: `https://wweek.com/calendar/cal`
+        linkURL: `https://www.wweek.com/calendar/cal`
     },
     {
         linkName: `the Oregonian Events`,
