@@ -41,7 +41,7 @@ const eventsList = [
 function appendEvents(){
     eventsList.forEach(event => {
         $('.events-links-list').append(`
-             <a class="event-link" href=${event.linkURL} target="_blank">${event.linkName}</a>      
+             <a class="event-link" href=${event.linkURL} target="_blank" title="Go to ${event.linkURL}">${event.linkName}</a>      
         `)
     })
 }
